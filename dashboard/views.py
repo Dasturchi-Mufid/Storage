@@ -264,11 +264,10 @@ def report(request):
 
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
-
-    start_datetime = parse_datetime(start_date)
-    end_datetime = parse_datetime(end_date)
     
     if start_date and end_date:
+        start_datetime = parse_datetime(start_date)
+        end_datetime = parse_datetime(end_date)
         end_datetime += timedelta(days=1)
         outs = models.Outlay.objects.filter(returned=False, date__range=[start_datetime, end_datetime])
         enters = models.Enter.objects.filter(date__range=[start_datetime, end_datetime])
