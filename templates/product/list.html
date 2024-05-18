@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <div class="row justify-content-center">
+
+                            <div class="col-xl-10">
+                                <!-- Products-->
+                                <div class="card">
+                                    <div class="card-body p-0">
+                                        <div class="p-3">
+                                            <h5 class="header-title mb-0">Products</h5>
+                                            <a href="{% url 'create_product' %}" class="btn btn-primary position-absolute end-0 ">Product category</a>
+                                        </div>
+    
+                                        <div id="yearly-sales-collapse" class="collapse show">
+    
+                                            <div class="table-responsive">
+                                                <table class="table table-nowrap table-hover mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Product Name</th>
+                                                            <th>Category</th>
+                                                            <th>Price</th>
+                                                            <th>QR Code</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for product in products %}
+                                                        <tr>
+                                                            <td>{{forloop.counter}}</td>
+                                                            <td><a href="{% url 'product_detail' product.code %}">{{product.name}}</a></td>
+                                                            <td><a href="{% url 'product_list' product.category.code %}">{{product.category}}</a></td>
+                                                            <td>{{product.price}}</td>
+                                                            <td>
+                                                                <a href="{{product.qr_code.url}}">
+                                                                    <img src="{{product.qr_code.url}}" height="50px">
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="{% url 'update_product' product.code %}"><i class="ri-pencil-fill"></i></a>
+                                                                <a href="{% url 'product_delete' product.code %}"><i class="ri-delete-bin-6-fill"></i></a>
+                                                                <a href="{% url 'enter_list' product.code %}"><i class="ri-chat-history-fill"></i></a>
+                                                            </td>
+                                                        </tr>                                                      
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>        
+                                        </div>
+                                    </div>                           
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by <b>Mufid</b>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+            
+
+{% endblock content %}
+    

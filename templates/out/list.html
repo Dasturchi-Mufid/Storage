@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+
+                <div class="col-xl-10">
+                    <!-- Products-->
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="p-3">
+                                <h5 class="header-title mb-0" style="display: inline;">Outs</h5>
+                                <a href="{% url 'create_out' %}" class="btn btn-primary position-absolute end-0 ">Create enter</a>
+                                
+                            </div>
+
+                            <div id="yearly-sales-collapse" class="collapse show">
+
+                                <div class="table-responsive">
+                                    <table class="table table-nowrap table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Product</th>
+                                                <th>Category</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for out in outlays %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td><a href="{% url 'product_detail' out.product.code %}">{{out.product.name}}</a></td>
+                                                <td><a href="{% url 'product_list' out.product.category.code %}">{{out.product.category}}</a></td>
+                                                <td>{{out.price}}</td>
+                                                <td style="color: red;">- {{out.quantity}}</td>
+                                                <td>{{out.date}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-modal{{forloop.counter}}"><i class="ri-pencil-fill"></i></button>
+                                                </td>
+                                                <!-- Update modal content -->
+                                                <div id="update-modal{{forloop.counter}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="update-modalLabel">{{out.product.name}}</h4>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="{% url 'update_out' out.code %}" method="post">
+                                                                    {% csrf_token %}
+                                                                    <div class="mb-3">
+                                                                        <div class="input-group">
+                                                                            <input type="number" class="form-control" value="{{out.quantity}}" aria-label="Name" name="quantity" min="0">
+                                                                            <button class="btn btn-dark" type="submit">Update</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div><!-- /.modal-content -->
+                                                    </div><!-- /.modal-dialog -->
+                                                </div><!-- /.modal -->
+                                            </tr>                                                      
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>        
+                            </div>
+                        </div>                           
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            
+            </div> <!-- container -->
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

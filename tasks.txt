@@ -1,0 +1,24 @@
+FN10 guruhi uchun yakuniy nazorat imthoni.
+
+Kompyuter do`koni uchun kirim chiqimlarni hisoblovchi dastur yozish.
+
+1) Dastur boshqaruv paneli tayyorlash
+2) Sanadan sanagacha kirim va chiqimlarni hisoblash
+3) Maxsulot kiritish
+4) Maxsulot sotish
+5) Sotilgan mahsulotni qaytarish
+6) Dastur faqat do`kon xodimlari uchun ishlaydi va faqat 1ta role bo`ladi
+7) Authentication sifatida Basic va Session ishlatiladi
+8) Har bir maxsulot uchun QR code yaratilinadi +
+9) Dastur texnologiyalari sifatida Django, Front-end tarafi uchun Html, css, Bootstrap, JSdan foydalaniladi
+10) Loyiha Githubga yuklanadi va repository liniki ERPga qo`yiladi
+11) Env file gitignorega qo`yiladi +
+12) Superuserning username:root, password:1 bo`ladi +
+
+Imthon quyidagi mezonda baholanadi:
+
+1) Maksimal ball 100 ball
+2) Modellar uchun 0 dan- 20 ballgacha
+3) View lar uchun 0 dan -20 ballgacha
+4) Shablonlar uchun 0 dan -30 ballgacha
+5) Admin panel,urllar uchun 0 dan -30 ballgacha

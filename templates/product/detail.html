@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        <div class="card">
+                            <div class="page-title-box">
+                                <div class="d-flex justify-content-around">
+                                    <h4>Product detail</h4>
+                                    <a href="{% url 'update_product' product.code %}" class="btn btn-primary">Update</a>
+                                    <a href="{% url 'product_delete' product.code %}" class="btn btn-danger">Delete</a>
+                                </div>
+                                <div class="d-flex justify-content-around">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            {% for image in images %}
+                                            <div class="mb-3">
+                                                <img src="{{ image.image.url }}" height="100px">
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <b>Name</b>: {{product.name}}
+                                            </div>
+                                            <div class="mb-3">
+                                                <b>Category</b>: <a href="{% url 'product_list' product.category.code %}">{{product.category.name}}</a>
+                                            </div>
+                                            <div class="mb-3">
+                                                 <b>Price</b>: {{product.price}} $
+                                            </div>
+                                            <div class="mb-3">
+                                                <b>Description</b>: {{product.description}}
+                                            </div>
+                                            <div class="mb-3">
+                                                 <b>Quantity</b>: {{product.quantity}}
+                                            </div>
+                                            <div class="mb-3">
+                                                 <b>Scan me</b>: <img src="{{product.qr_code.url}}" height="100px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+{% endblock content %}
+    

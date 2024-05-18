@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <h4 class="page-title">Welcome {{ request.user|title }}!</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="example-date" class="form-label">Date</label>
+                            <div class="input-group">
+                                <input class="form-control" id="example-date" type="datetime-local" name="start_date">
+                                <input class="form-control" id="example-date" type="datetime-local" name="end_date">
+                                <button class="btn btn-primary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row justify-content-center">
+
+                        <div class="col-xl-10">
+                            <!-- Products-->
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="p-3">
+                                        <h5 class="header-title mb-0">Enters</h5>
+                                    </div>
+
+                                    <div id="yearly-sales-collapse" class="collapse show">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-nowrap table-hover mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Product Name</th>
+                                                        <th>Category</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for enter in reports %}
+                                                    <tr>
+                                                        <td>{{forloop.counter}}</td>
+                                                        <td>{{enter.product.name}}</td>
+                                                        <td>{{enter.product.category}}</td>
+                                                        <td>{{enter.total}}</td>
+                                                        {% if enter.returned == false %}
+                                                        <td style="color: red;">
+                                                            - {{enter.quantity}}
+                                                        </td>
+                                                        {% else %}
+                                                        <td style="color: green;">
+                                                            + {{enter.quantity}}
+                                                        </td>
+                                                        {% endif %}
+                                                        <td>
+                                                            {{enter.date}}    
+                                                        </td>
+                                                    </tr>                                                      
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>        
+                                    </div>
+                                </div>                           
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                    </div>
+                    <!-- end row -->
+
+                </div>
+                <!-- container -->
+
+            </div>
+            <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by <b>Mufid</b>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+{% endblock content %}

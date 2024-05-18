@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Create product</h4>
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="justify-content-center">
+                                            <div class="card-body">
+                                            <div class="mb-3">
+                                                <div class="col-lg-6">
+                                                    <label class="form-label">Name</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="name" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <p class="mb-1 fw-bold text-muted">Category</p>
+                                                    <select class="form-control select2" name="category_code">
+                                                        {% for category in categories %}
+                                                        <option value="{{category.code}}">{{category.name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div> <!-- end col -->
+                                                <div class="col-lg-6">
+                                                    <label class="form-label">Price</label>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" placeholder="0" aria-label="Name" name="price" min="0" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="form-label">Description</label>
+                                                    <div class="input-group">
+                                                        <textarea name="description" class="form-control" required></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="form-label">Images</label>
+                                                    <div class="input-group">
+                                                        <input type="file" class="form-control" name="images" multiple>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-success">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by <b>Mufid</b>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+{% endblock content %}
+    

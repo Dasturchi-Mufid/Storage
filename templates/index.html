@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <h4 class="page-title">Welcome {{ request.user|title }}!</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-xxl-3 col-sm-6">
+                            <div class="card widget-flat text-bg-pink">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-eye-line widget-icon"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Returned products</h6>
+                                    <h2 class="my-2">{{returns.count}}</h2>
+                                    <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div> <!-- end col-->
+
+                        <div class="col-xxl-3 col-sm-6">
+                            <div class="card widget-flat text-bg-purple">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-wallet-2-line widget-icon"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Products</h6>
+                                    <h2 class="my-2">{{products.count}}</h2>
+                                    <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-10 me-1">18.25%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div> <!-- end col-->
+
+                        <div class="col-xxl-3 col-sm-6">
+                            <div class="card widget-flat text-bg-info">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-shopping-basket-line widget-icon"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Outlays</h6>
+                                    <h2 class="my-2">{{outlays.count}}</h2>
+                                    <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div> <!-- end col-->
+
+                        <div class="col-xxl-3 col-sm-6">
+                            <div class="card widget-flat text-bg-primary">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-group-2-line widget-icon"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers">Enters</h6>
+                                    <h2 class="my-2">{{enters.count}}</h2>
+                                    <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div> <!-- end col-->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row justify-content-center">
+
+                        <div class="col-xl-10">
+                            <!-- Products-->
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="p-3">
+                                        <h5 class="header-title mb-0">Products</h5>
+                                    </div>
+
+                                    <div id="yearly-sales-collapse" class="collapse show">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-nowrap table-hover mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Product Name</th>
+                                                        <th>Category</th>
+                                                        <th>Price</th>
+                                                        <th>QR Code</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for product in products %}
+                                                    <tr>
+                                                        <td>{{forloop.counter}}</td>
+                                                        <td>{{product.name}}</td>
+                                                        <td>{{product.category}}</td>
+                                                        <td>{{product.price}}</td>
+                                                        <td>
+                                                            <a href="{{product.qr_code.url}}">
+                                                                <img src="{{product.qr_code.url}}" height="50px">
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{% url 'update_product' product.code %}"><i class="ri-pencil-fill"></i></a>
+                                                            <a href="{% url 'product_delete' product.code %}"><i class="ri-delete-bin-6-fill" style="padding: 5px;"></i></a>
+                                                            <a href="{% url 'enter_list' product.code %}"><i class="ri-chat-history-fill"></i></a>
+                                                        </td>
+                                                    </tr>                                                      
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>        
+                                    </div>
+                                </div>                           
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                        <div class="col-xl-10">
+                            <!-- Enters-->
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="p-3">
+                                        <h5 class="header-title mb-0">Enter products</h5>
+                                    </div>
+
+                                    <div id="yearly-sales-collapse" class="collapse show">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-nowrap table-hover mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Product Name</th>
+                                                        <th>Category</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for enter in enters %}
+                                                    <tr>
+                                                        <td>{{forloop.counter}}</td>
+                                                        <td>{{enter.product.name}}</td>
+                                                        <td>{{enter.product.category}}</td>
+                                                        <td>{{enter.price}}</td>
+                                                        <td>{{enter.quantity}}</td>
+                                                        <td>{{enter.date}}</td>
+                                                        <td>
+                                                            <a href=""><i class="ri-pencil-fill"></i></a>
+                                                            <a href=""><i class="ri-delete-bin-6-fill"></i></a>
+                                                        </td>
+                                                    </tr>                                                      
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>        
+                                    </div>
+                                </div>                           
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                        <div class="col-xl-10">
+                            <!-- Outlays-->
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="p-3">
+                                        <h5 class="header-title mb-0">Outlayted products</h5>
+                                    </div>
+
+                                    <div id="yearly-sales-collapse" class="collapse show">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-nowrap table-hover mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Product Name</th>
+                                                        <th>Category</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for outlay in outlays %}
+                                                    <tr>
+                                                        <td>{{forloop.counter}}</td>
+                                                        <td>{{outlay.product.name}}</td>
+                                                        <td>{{outlay.product.category}}</td>
+                                                        <td>{{outlay.product.price}}</td>
+                                                        <td>{{outlay.quantity}}</td>
+                                                        <td>{{outlay.date}}</td>
+                                                        <td>
+                                                            <a href=""><i class="ri-pencil-fill"></i></a>
+                                                            <a href=""><i class="ri-delete-bin-6-fill"></i></a>
+                                                        </td>
+                                                    </tr>                                                      
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>        
+                                    </div>
+                                </div>                           
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                        <div class="col-xl-10">
+                            <!-- Returns-->
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="p-3">
+                                        <h5 class="header-title mb-0">Returned products</h5>
+                                    </div>
+
+                                    <div id="yearly-sales-collapse" class="collapse show">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-nowrap table-hover mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Product Name</th>
+                                                        <th>Category</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for return in returns %}
+                                                    <tr>
+                                                        <td>{{forloop.counter}}</td>
+                                                        <td>{{return.out.product.name}}</td>
+                                                        <td>{{return.out.product.category}}</td>
+                                                        <td>{{return.out.product.price}}</td>
+                                                        <td>{{return.out.quantity}}</td>
+                                                        <td>{{return.out.date}}</td>
+                                                        <td>
+                                                            <a href=""><i class="ri-pencil-fill"></i></a>
+                                                            <a href=""><i class="ri-delete-bin-6-fill"></i></a>
+                                                        </td>
+                                                    </tr>                                                      
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>        
+                                    </div>
+                                </div>                           
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                    </div>
+                    <!-- end row -->
+
+                </div>
+                <!-- container -->
+
+            </div>
+            <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by <b>Mufid</b>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+{% endblock content %}

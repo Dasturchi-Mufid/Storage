@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Create Return</h4>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                <div class="mb-3">
+                                                    <div class="col-lg-6">
+                                                        <p class="mb-1 fw-bold text-muted">Product</p>
+                                                        <select class="form-control select2" name="out_code">
+                                                            {% for out in outlays %}
+                                                            <option value="{{out.code}}">{{out}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div> <!-- end col -->
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check form-checkbox-success mb-2">
+                                                            <input type="checkbox" class="form-check-input" id="customCheckcolor2" checked="" name="return">
+                                                            <label class="form-check-label" for="customCheckcolor2" >Returned</label>
+                                                        </div>
+                                                    </div> <!-- end col -->
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Create</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+                    </div> <!-- container -->
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by <b>Mufid</b>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+{% endblock content %}
+    
