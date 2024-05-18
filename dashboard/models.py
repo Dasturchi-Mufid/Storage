@@ -79,7 +79,7 @@ class Product(CodeGenerate):
         img = qr.make_image(fill_color="black", back_color="white")
         buffer = BytesIO()
         img.save(buffer, format="PNG")
-        file_name = f'{self.name}_{self.created_at.strftime("%d-%m-%Y")}.png'
+        file_name = f'{self.name}_{self.created_at}.png'
         self.qr_code.save(file_name, File(buffer), save=False)
         super(Product,self).save(*args, **kwargs)
 
@@ -123,9 +123,7 @@ class Enter(CodeGenerate):
         if self.pk:
             obj = Enter.objects.get(id=self.id)
             self.product.quantity -= obj.quantity
-            self.price -= obj.price
         self.product.quantity += int(self.quantity)
-        self.price += int(self.price)
         self.product.save()
         super(Enter, self).save(*args, **kwargs)
 
