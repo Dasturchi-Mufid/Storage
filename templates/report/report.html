@@ -19,19 +19,39 @@
                             </div>
                         </div>
                     </div>
-                    <!-- end page title -->
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="example-date" class="form-label">Date</label>
-                            <div class="input-group">
-                                <input class="form-control" id="example-date" type="datetime-local" name="start_date">
-                                <input class="form-control" id="example-date" type="datetime-local" name="end_date">
-                                <button class="btn btn-primary" type="submit">Filter</button>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-10">
+                            <!-- Products-->
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <!-- end page title -->
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="example-date" class="form-label">Date</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="example-date" type="date" name="start_date">
+                                                <input class="form-control" id="example-date" type="date" name="end_date">
+                                                <button class="btn btn-primary" type="submit">Filter</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </form>
-
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-xl-10">
+                            <div class="card">
+                                <div class="card-body" style="color: green; display: inline;">
+                                    Enters: +{{out_total}}
+                                </div>
+                                <div class="card-body" style="color: red;">
+                                    Outs: -{{enter_total}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if reports %}
                     <div class="row justify-content-center">
 
                         <div class="col-xl-10">
@@ -86,6 +106,7 @@
                         </div> <!-- end col-->
                     </div>
                     <!-- end row -->
+                    {% endif %}
 
                 </div>
                 <!-- container -->

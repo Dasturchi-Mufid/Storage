@@ -171,9 +171,32 @@
                                                         <td>{{enter.quantity}}</td>
                                                         <td>{{enter.date}}</td>
                                                         <td>
-                                                            <a href=""><i class="ri-pencil-fill"></i></a>
-                                                            <a href=""><i class="ri-delete-bin-6-fill"></i></a>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#update-modal{{forloop.counter}}"><i class="ri-pencil-fill"></i></a>
                                                         </td>
+                                                        <!-- Update modal content -->
+                                                        <div id="update-modal{{forloop.counter}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title" id="update-modalLabel">{{enter.product.name}}</h4>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="{% url 'update_enter' enter.code %}" method="post">
+                                                                            {% csrf_token %}
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Quantity</label>
+                                                                                <div class="input-group">
+                                                                                    <input type="number" class="form-control" value="{{enter.quantity}}" aria-label="Name" name="quantity" min="0">
+                                                                                    <input type="number" class="form-control" value="{{enter.price}}" aria-label="Name" name="price" min="0">
+                                                                                    <button class="btn btn-dark" type="submit">Update</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->
                                                     </tr>                                                      
                                                     {% endfor %}
                                                 </tbody>
@@ -216,9 +239,30 @@
                                                         <td>{{outlay.quantity}}</td>
                                                         <td>{{outlay.date}}</td>
                                                         <td>
-                                                            <a href=""><i class="ri-pencil-fill"></i></a>
-                                                            <a href=""><i class="ri-delete-bin-6-fill"></i></a>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#update-out{{forloop.counter}}"><i class="ri-pencil-fill"></i></a>
                                                         </td>
+                                                        <!-- Update modal content -->
+                                                        <div id="update-out{{forloop.counter}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title" id="update-modalLabel">{{outlay.product.name}}</h4>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="{% url 'update_out' outlay.code %}" method="post">
+                                                                            {% csrf_token %}
+                                                                            <div class="mb-3">
+                                                                                <div class="input-group">
+                                                                                    <input type="number" class="form-control" value="{{out.quantity}}" aria-label="Name" name="quantity" min="0">
+                                                                                    <button class="btn btn-dark" type="submit">Update</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->
                                                     </tr>                                                      
                                                     {% endfor %}
                                                 </tbody>
@@ -261,9 +305,30 @@
                                                         <td>{{return.out.quantity}}</td>
                                                         <td>{{return.out.date}}</td>
                                                         <td>
-                                                            <a href=""><i class="ri-pencil-fill"></i></a>
-                                                            <a href=""><i class="ri-delete-bin-6-fill"></i></a>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#update-return{{forloop.counter}}"><i class="ri-pencil-fill"></i></a>
                                                         </td>
+                                                        <!-- Update modal content -->
+                                                        <div id="update-return{{forloop.counter}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title" id="update-modalLabel">{{out.product.name}}</h4>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="{% url 'update_out' return.out.code %}" method="post">
+                                                                            {% csrf_token %}
+                                                                            <div class="mb-3">
+                                                                                <div class="input-group">
+                                                                                    <input type="number" class="form-control" value="{{return.out.quantity}}" aria-label="Name" name="quantity" min="0">
+                                                                                    <button class="btn btn-dark" type="submit">Update</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->
                                                     </tr>                                                      
                                                     {% endfor %}
                                                 </tbody>

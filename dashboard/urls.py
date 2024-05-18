@@ -6,6 +6,9 @@ urlpatterns = [
     path('q/',views.search,name='search'),
     path('report/',views.report,name='report'),
 
+    path('login/',views.log_in,name='login'),
+    path('logout/',views.log_out,name='logout'),
+
     path('category/create',views.create_category,name='create_category'),
     path('category/list',views.category_list,name='category_list'),
     path('category/update/<str:code>/',views.update_category,name='update_category'),

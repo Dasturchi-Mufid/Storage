@@ -53,6 +53,7 @@ class Product(CodeGenerate):
         return self.name
     
 
+
     def save(self, *args, **kwargs):
         if self.id:
             image_path = self.qr_code.path
@@ -141,6 +142,10 @@ class Outlay(CodeGenerate):
     def __str__(self):
         return f'{self.product.name} - {self.quantity} - {self.returned} - {self.date.strftime("%d.%m.%Y %H-%M-%S")}'
 
+
+    @property
+    def total(self):
+        return self.product.price * self.quantity
 
     def save(self, *args, **kwargs):
         if not self.pk:
